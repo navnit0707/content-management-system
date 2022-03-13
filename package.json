@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/navnit0707/content-management-system#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.3",
+    "path": "^0.12.7"
   }
 }
