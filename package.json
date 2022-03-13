@@ -1,0 +1,22 @@
+{
+  "name": "content-management-system",
+  "version": "1.0.0",
+  "description": "A CMS in nodeJs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navnit0707/content-management-system.git"
+  },
+  "author": "Navnit",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/navnit0707/content-management-system/issues"
+  },
+  "homepage": "https://github.com/navnit0707/content-management-system#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
