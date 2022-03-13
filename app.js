@@ -22,6 +22,7 @@ app.get('/login',(req,res)=>{
 app.get('/register',(req,res)=>{
     res.render('home/register');
 });
+
 app.listen(4500,()=>{
     console.log(`listening on port 4500`);
 });
