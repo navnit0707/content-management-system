@@ -1,25 +1,25 @@
 const mongoose = require('mongoose');
-const schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-const PostSchema = new schema({
-    user: {
+const PostSchema = new Schema({
 
-    },
     title: {
-        type: string,
-        require: true,
+        type: String,
+        required: true,
     },
     status: {
-        type: string,
+        type: String,
         default: 'public',
     },
     allowComments: {
-        type: string,
+        type: String,
         require: true,
     },
     body: {
-        type: string,
+        type: String,
         require: true,
 
     }
 });
+
+module.exports = mongoose.model('posts', PostSchema);
