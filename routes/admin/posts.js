@@ -45,8 +45,12 @@ router.post('/create', (req, res) => {
 
 });
 
-router.get('edit/:id', (req, res) => {
-    res.render('admin/posts/edit');
+router.get('/edit/:id', (req, res) => {
+    Post.findOne({ _id: req.params.id }).then(post => {
+        res.render('admin/posts/edit', { post: post });
+
+    });
+
 });
 
 module.exports = router;
