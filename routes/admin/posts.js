@@ -1,4 +1,5 @@
 const express = require('express');
+const res = require('express/lib/response');
 const router = express.Router();
 
 router.all('/*', (req, res, next) => {
@@ -6,11 +7,8 @@ router.all('/*', (req, res, next) => {
 
     next();
 });
-
 router.get('/', (req, res) => {
-    res.render('admin/index');
+    res.send('IT works')
 });
-
-
 
 module.exports = router;
