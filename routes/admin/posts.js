@@ -12,7 +12,7 @@ router.all('/*', (req, res, next) => {
 router.get('/', (req, res) => {
     Post.find({}).then(posts => {
         res.render('admin/posts', { posts: posts });
-        console.log(posts);
+
     });
 
 
@@ -43,6 +43,10 @@ router.post('/create', (req, res) => {
         console.log('error');
     });
 
+});
+
+router.get('edit/:id', (req, res) => {
+    res.render('admin/posts/edit');
 });
 
 module.exports = router;
