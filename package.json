@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/navnit0707/content-management-system#readme",
   "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.5",
     "body-parser": "^1.19.2",
     "express": "^4.17.3",
     "express-handlebars": "^6.0.3",
+    "handlebars": "^4.7.7",
     "mongoose": "^6.2.6",
     "path": "^0.12.7"
   }

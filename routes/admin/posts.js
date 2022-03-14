@@ -10,7 +10,12 @@ router.all('/*', (req, res, next) => {
     next();
 });
 router.get('/', (req, res) => {
-    res.send('IT works')
+    Post.find({}).then(posts => {
+        res.render('admin/posts', { posts: posts });
+        console.log(posts);
+    });
+
+
 });
 
 router.get('/create', (req, res) => {
@@ -19,6 +24,7 @@ router.get('/create', (req, res) => {
 router.post('/create', (req, res) => {
 
     let allowComments = true;
+
     if (req.body.allowComments) {
         allowComments = true;
     } else {
@@ -34,7 +40,7 @@ router.post('/create', (req, res) => {
     newPost.save().then(savedPost => {
         res.redirect('/admin/posts');
     }).catch(error => {
-        console.log(error);
+        console.log('error');
     });
 
 });

@@ -12,7 +12,7 @@ const PostSchema = new Schema({
         default: 'public',
     },
     allowComments: {
-        type: String,
+        type: Boolean,
         require: true,
     },
     body: {

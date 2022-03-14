@@ -4,6 +4,9 @@ const path = require('path');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
+const Handlebars = require('handlebars');
+
 
 mongoose.connect('mongodb://localhost:27017/cms').then((db) => {
     console.log('Mongo Connected');
@@ -14,7 +17,9 @@ mongoose.connect('mongodb://localhost:27017/cms').then((db) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.engine('handlebars', exphbs.engine({ defaultLayout: 'home' }));
+app.engine('handlebars', exphbs.engine({ handlebars: allowInsecurePrototypeAccess(Handlebars), defaultLayout: 'home' }
+
+));
 app.set('view engine', 'handlebars');
 
 //body parser
