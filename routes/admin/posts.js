@@ -14,5 +14,8 @@ router.get('/', (req, res) => {
 router.get('/create', (req, res) => {
     res.render('admin/posts/create');
 });
+router.post('/create', (req, res) => {
+    res.send('worked');
+});
 
 module.exports = router;
