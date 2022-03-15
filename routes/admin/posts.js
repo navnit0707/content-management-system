@@ -36,7 +36,10 @@ router.post('/create', (req, res) => {
         allowComments: allowComments,
         body: req.body.body
     });
-    console.log(req.body.allowComments);
+
+    //console.log(req.body.allowComments);
+
+
     newPost.save().then(savedPost => {
         res.redirect('/admin/posts');
     }).catch(error => {
