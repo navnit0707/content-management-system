@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 const Handlebars = require('handlebars');
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
+const upload = require('express-fileupload');
+
 
 mongoose.connect('mongodb://localhost:27017/cms').then((db) => {
     console.log('Mongo Connected');
@@ -29,6 +31,10 @@ app.engine('handlebars', exphbs.engine({
 
 ));
 app.set('view engine', 'handlebars');
+
+//upload Middleware
+
+app.use(upload()); //adds file property into request
 
 //body parser
 app.use(bodyParser.urlencoded());

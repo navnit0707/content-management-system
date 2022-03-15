@@ -22,29 +22,29 @@ router.get('/create', (req, res) => {
     res.render('admin/posts/create');
 });
 router.post('/create', (req, res) => {
+    console.log(req.files);
+    // let allowComments = true;
 
-    let allowComments = true;
+    // if (req.body.allowComments) {
+    //     allowComments = true;
+    // } else {
+    //     allowComments = false;
+    // }
+    // const newPost = new Post({
+    //     title: req.body.title,
+    //     status: req.body.status,
+    //     allowComments: allowComments,
+    //     body: req.body.body
+    // });
 
-    if (req.body.allowComments) {
-        allowComments = true;
-    } else {
-        allowComments = false;
-    }
-    const newPost = new Post({
-        title: req.body.title,
-        status: req.body.status,
-        allowComments: allowComments,
-        body: req.body.body
-    });
-
-    //console.log(req.body.allowComments);
+    // //console.log(req.body.allowComments);
 
 
-    newPost.save().then(savedPost => {
-        res.redirect('/admin/posts');
-    }).catch(error => {
-        console.log('error');
-    });
+    // newPost.save().then(savedPost => {
+    //     res.redirect('/admin/posts');
+    // }).catch(error => {
+    //     console.log('error');
+    // });
 
 });
 
