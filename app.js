@@ -17,7 +17,15 @@ mongoose.connect('mongodb://localhost:27017/cms').then((db) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.engine('handlebars', exphbs.engine({ handlebars: allowInsecurePrototypeAccess(Handlebars), defaultLayout: 'home' }
+//helpers 
+const { select } = require('./helpers/handlebars-helpers')
+
+
+app.engine('handlebars', exphbs.engine({
+        handlebars: allowInsecurePrototypeAccess(Handlebars),
+        defaultLayout: 'home',
+        helpers: { select: select }
+    }
 
 ));
 app.set('view engine', 'handlebars');
