@@ -23,90 +23,90 @@ router.get('/create', (req, res) => {
     res.render('admin/posts/create');
 });
 
-router.post('/create', (req, res)=>{
+router.post('/create', (req, res) => {
 
     let errors = [];
 
-if(!req.body.title) {
+    if (!req.body.title) {
 
-    errors.push({message: 'please add a title'});
+        errors.push({ message: 'please add a title' });
 
-}
-
-
-if(!req.body.body) {
-
-    errors.push({message: 'please add a description'});
-
-}
+    }
 
 
-if(errors.length > 0){
+    if (!req.body.body) {
 
-    res.render('admin/posts/create', {
+        errors.push({ message: 'please add a description' });
 
-        errors: errors
-
-    })
-
-} else {
+    }
 
 
-  let filename = 'BMW-Z4.jpg';
+    if (errors.length > 0) {
+
+        res.render('admin/posts/create', {
+
+            errors: errors
+
+        })
+
+    } else {
 
 
-//  if(!isEmpty(req.files)){
-
-//     let file = req.files.file;
-//     filename = Date.now() + '-' + file.name;
-
-//     file.mv('./public/uploads/' + filename, (err)=>{
-
-//         if(err) throw err;
-
-//     });
+        let filename = 'BMW-Z4.jpg';
 
 
-// }
+        //  if(!isEmpty(req.files)){
 
-let allowComments = true;
+        //     let file = req.files.file;
+        //     filename = Date.now() + '-' + file.name;
 
-if(req.body.allowComments){
+        //     file.mv('./public/uploads/' + filename, (err)=>{
 
-    allowComments = true;
+        //         if(err) throw err;
 
-} else{
-
-    allowComments = false;
-
-}
+        //     });
 
 
-const newPost = new Post({
+        // }
+
+        let allowComments = true;
+
+        if (req.body.allowComments) {
+
+            allowComments = true;
+
+        } else {
+
+            allowComments = false;
+
+        }
 
 
-   // user: req.user.id,
-    title: req.body.title,
-    status: req.body.status,
-    allowComments: allowComments,
-    body: req.body.body,
-    //category: req.body.category,
-    file: filename
-
-});
-
-newPost.save().then(savedPost =>{
-
-    req.flash('success_message',`Post ${savedPost.title} was created`);
-    res.redirect('/admin/posts');
-    
-
-});
-
-}
+        const newPost = new Post({
 
 
-// console.log(req.body.allowComments);
+            // user: req.user.id,
+            title: req.body.title,
+            status: req.body.status,
+            allowComments: allowComments,
+            body: req.body.body,
+            //category: req.body.category,
+            file: filename
+
+        });
+
+        newPost.save().then(savedPost => {
+
+            req.flash('success_message', `Post ${savedPost.title} was created`);
+            res.redirect('/admin/posts');
+
+
+        });
+
+    }
+
+
+    // console.log(req.body.allowComments);
 
 
 });
@@ -120,6 +120,8 @@ router.get('/edit/:id', (req, res) => {
 });
 
 router.put('/edit/:id', (req, res) => {
+
+
     Post.findOne({ _id: req.params.id }).then(post => {
 
         if (req.body.allowComments) {
@@ -132,8 +134,21 @@ router.put('/edit/:id', (req, res) => {
         post.status = req.body.status;
         post.allowComments = allowComments;
         post.body = req.body.body;
+        //  if(!isEmpty(req.files)){
 
+        //     let file = req.files.file;
+        //     filename = Date.now() + '-' + file.name;
+        //      post.file = filename;
+        //     file.mv('./public/uploads/' + filename, (err)=>{
+
+        //         if(err) throw err;
+
+        //     });
+
+
+        // }
         post.save().then((updatedPost) => {
+            req.flash('success_message', 'Post updated successfully')
             res.redirect('/admin/posts');
         });
 
