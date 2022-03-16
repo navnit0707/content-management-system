@@ -1,3 +1,4 @@
+const moment = require('moment');
 module.exports = {
 
 
@@ -7,6 +8,9 @@ module.exports = {
                 selected + '\"'), '$&selected = "selected"');
 
 
+    },
+    generateTime: function(data, format) {
+        return moment(data).format(format);
     }
 
 

@@ -21,16 +21,20 @@ mongoose.connect('mongodb://localhost:27017/cms').then((db) => {
 app.use(express.static(path.join(__dirname, 'public')));
 
 //helpers 
-const { select } = require('./helpers/handlebars-helpers')
+const { select, generateTime } = require('./helpers/handlebars-helpers');
 
 
 app.engine('handlebars', exphbs.engine({
         handlebars: allowInsecurePrototypeAccess(Handlebars),
         defaultLayout: 'home',
-        helpers: { select: select }
+        helpers: {
+            select: select,
+            generateTime: generateTime
+        }
     }
 
 ));
+
 app.set('view engine', 'handlebars');
 
 //upload Middleware
@@ -47,13 +51,13 @@ app.use(methodOverride('_method'));
 
 //session
 app.use(session({
-    secret : 'navnit123ilovecoding',
-    resave : true,
-    saveUninitialized : true
+    secret: 'navnit123ilovecoding',
+    resave: true,
+    saveUninitialized: true
 }));
 app.use(flash());
 
-app.use((req,res,next)=>{
+app.use((req, res, next) => {
     res.locals.success_message = req.flash('success_message');
     next();
 });
