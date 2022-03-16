@@ -8,7 +8,8 @@ const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-ac
 const Handlebars = require('handlebars');
 const methodOverride = require('method-override');
 const upload = require('express-fileupload');
-
+const session = require('express-session');
+const flash = require('connect-flash');
 
 mongoose.connect('mongodb://localhost:27017/cms').then((db) => {
     console.log('Mongo Connected');
@@ -43,6 +44,20 @@ app.use(bodyParser.json());
 //Method override
 app.use(methodOverride('_method'));
 //load routes
+
+//session
+app.use(session({
+    secret : 'navnit123ilovecoding',
+    resave : true,
+    saveUninitialized : true
+}));
+app.use(flash());
+
+app.use((req,res,next)=>{
+    res.locals.success_message = req.flash('success_message');
+    next();
+});
+
 const home = require('./routes/home/index');
 const admin = require('./routes/admin/index');
 const posts = require('./routes/admin/posts');

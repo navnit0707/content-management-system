@@ -22,48 +22,92 @@ router.get('/', (req, res) => {
 router.get('/create', (req, res) => {
     res.render('admin/posts/create');
 });
-router.post('/create', (req, res) =>{
-    let obj = JSON.parse(JSON.stringify(req.files));
-   
-    let filename = 'BMW-Z4.jpg';
-    let file = req.files.file;
-    console.log(file);
-        filename = Date.now() + '-' + file.name;
 
-    if (!isEmpty(obj)){
+router.post('/create', (req, res)=>{
 
-        let file = req.files.file;
-        filename = Date.now() + '-' + file.name;
+    let errors = [];
 
-        console.log()
-        file.mv('./public/uploads/' + filename, (err) =>{
-            if(err) throw err;
-        });
-    }
+if(!req.body.title) {
 
-    let allowComments = true;
+    errors.push({message: 'please add a title'});
 
-    if (req.body.allowComments) {
-        allowComments = true;
-    } else {
-        allowComments = false;
-    }
-    const newPost = new Post({
-        title: req.body.title,
-        status: req.body.status,
-        allowComments: allowComments,
-        body: req.body.body,
-        file: filename,
-    });
-
-    //console.log(req.body.allowComments);
+}
 
 
-    newPost.save().then(savedPost => {
-        res.redirect('/admin/posts');
-    }).catch(error => {
-        console.log('error');
-    });
+if(!req.body.body) {
+
+    errors.push({message: 'please add a description'});
+
+}
+
+
+if(errors.length > 0){
+
+    res.render('admin/posts/create', {
+
+        errors: errors
+
+    })
+
+} else {
+
+
+  let filename = 'BMW-Z4.jpg';
+
+
+//  if(!isEmpty(req.files)){
+
+//     let file = req.files.file;
+//     filename = Date.now() + '-' + file.name;
+
+//     file.mv('./public/uploads/' + filename, (err)=>{
+
+//         if(err) throw err;
+
+//     });
+
+
+// }
+
+let allowComments = true;
+
+if(req.body.allowComments){
+
+    allowComments = true;
+
+} else{
+
+    allowComments = false;
+
+}
+
+
+const newPost = new Post({
+
+
+   // user: req.user.id,
+    title: req.body.title,
+    status: req.body.status,
+    allowComments: allowComments,
+    body: req.body.body,
+    //category: req.body.category,
+    file: filename
+
+});
+
+newPost.save().then(savedPost =>{
+
+    req.flash('success_message',`Post ${savedPost.title} was created`);
+    res.redirect('/admin/posts');
+    
+
+});
+
+}
+
+
+// console.log(req.body.allowComments);
+
 
 });
 
