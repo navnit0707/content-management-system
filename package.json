@@ -1,34 +1,38 @@
 {
-  "name": "content-management-system",
-  "version": "1.0.0",
-  "description": "A CMS in nodeJs",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/navnit0707/content-management-system.git"
-  },
-  "author": "Navnit",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/navnit0707/content-management-system/issues"
-  },
-  "homepage": "https://github.com/navnit0707/content-management-system#readme",
-  "dependencies": {
-    "@handlebars/allow-prototype-access": "^1.0.5",
-    "body-parser": "^1.19.2",
-    "connect-flash": "^0.1.1",
-    "express": "^4.17.3",
-    "express-fileupload": "^1.3.1",
-    "express-handlebars": "^6.0.3",
-    "express-session": "^1.15.6",
-    "faker": "^4.1.0",
-    "handlebars": "^4.7.7",
-    "method-override": "^3.0.0",
-    "moment": "^2.29.1",
-    "mongoose": "^6.2.6",
-    "path": "^0.12.7"
-  }
+    "name": "content-management-system",
+    "version": "1.0.0",
+    "description": "A CMS in nodeJs",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/navnit0707/content-management-system.git"
+    },
+    "author": "Navnit",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/navnit0707/content-management-system/issues"
+    },
+    "homepage": "https://github.com/navnit0707/content-management-system#readme",
+    "dependencies": {
+        "@handlebars/allow-prototype-access": "^1.0.5",
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.19.2",
+        "connect-flash": "^0.1.1",
+        "express": "^4.17.3",
+        "express-fileupload": "^1.3.1",
+        "express-handlebars": "^6.0.3",
+        "express-session": "^1.17.2",
+        "faker": "^4.1.0",
+        "handlebars": "^4.7.7",
+        "method-override": "^3.0.0",
+        "moment": "^2.29.1",
+        "mongoose": "^6.2.6",
+        "mongoose-url-slugs": "^1.0.2",
+        "passport": "^0.4.0",
+        "passport-local": "^1.0.0",
+        "path": "^0.12.7"
+    }
 }
