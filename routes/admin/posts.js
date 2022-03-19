@@ -1,9 +1,10 @@
 const express = require('express');
-const res = require('express/lib/response');
 const router = express.Router();
 const fs = require('fs');
 const Post = require('../../models/Post');
 const { isEmpty } = require('../../helpers/upload-helpers')
+
+const uploadPath = __dirname + "/../../public/uploads/";
 
 router.all('/*', (req, res, next) => {
     req.app.locals.layout = 'admin';
@@ -23,7 +24,7 @@ router.get('/create', (req, res) => {
     res.render('admin/posts/create');
 });
 
-router.post('/create', (req, res) => {
+router.post("/create", (req, res) => {
 
     let errors = [];
 
@@ -52,22 +53,28 @@ router.post('/create', (req, res) => {
     } else {
 
 
-        let filename = 'BMW-Z4.jpg';
+        // let filename = "BMW-Z4.jpg";
+        // let file = req.files.file;
+        // console.log(file);
+        // filename = Date.now() + "-" + file.name;
+
+        if (!isEmpty(req.files.file)) {
+            let file = req.files.file;
+            filename = Date.now() + "-" + file.name;
+
+            const uploadPath = __dirname + "/../../public/uploads/";
+
+            file.mv(uploadPath + filename, (err) => {
+                if (err) {
+                    console.log(err);
+
+                    throw err;
+
+                }
+            });
 
 
-        //  if(!isEmpty(req.files)){
-
-        //     let file = req.files.file;
-        //     filename = Date.now() + '-' + file.name;
-
-        //     file.mv('./public/uploads/' + filename, (err)=>{
-
-        //         if(err) throw err;
-
-        //     });
-
-
-        // }
+        }
 
         let allowComments = true;
 
@@ -83,17 +90,11 @@ router.post('/create', (req, res) => {
 
 
         const newPost = new Post({
-
-
-            // user: req.user.id,
             title: req.body.title,
             status: req.body.status,
             allowComments: allowComments,
             body: req.body.body,
-            //category: req.body.category,
             file: filename,
-
-
         });
 
         newPost.save().then(savedPost => {
@@ -135,19 +136,25 @@ router.put('/edit/:id', (req, res) => {
         post.status = req.body.status;
         post.allowComments = allowComments;
         post.body = req.body.body;
-        //  if(!isEmpty(req.files)){
 
-        //     let file = req.files.file;
-        //     filename = Date.now() + '-' + file.name;
-        //      post.file = filename;
-        //     file.mv('./public/uploads/' + filename, (err)=>{
+        if (!isEmpty(req.files.file)) {
 
-        //         if(err) throw err;
+            let file = req.files.file;
+            filename = Date.now() + '-' + file.name;
+            post.file = filename;
 
-        //     });
+            const uploadPath = __dirname + "/../../public/uploads/";
+            file.mv(uploadPath + filename, (err) => {
+                if (err) {
+                    console.log(err);
+
+                    throw err;
+
+                }
+            });
 
 
-        // }
+        }
         post.save().then((updatedPost) => {
             req.flash('success_message', 'Post updated successfully')
             res.redirect('/admin/posts');
@@ -157,10 +164,24 @@ router.put('/edit/:id', (req, res) => {
 
 });
 router.delete('/:id', (req, res) => {
-    Post.remove({ _id: req.params.id })
-        .then(result => {
-            res.redirect('/admin/posts');
+
+    Post.findOne({ _id: req.params.id })
+
+    .then(post => {
+        const uploadPath = __dirname + "/../../public/uploads/";
+        console.log(uploadPath + post.file);
+        fs.unlink(uploadPath + post.file, (err) => {
+            post.remove().then(postRemoved => {
+
+                req.flash('success_message', 'Post was successfully deleted');
+                res.redirect('/admin/posts/');
+
+            });
+
+
         });
+
+    });
 });
 
 
