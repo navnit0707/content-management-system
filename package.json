@@ -15,6 +15,9 @@
     "bugs": {
         "url": "https://github.com/navnit0707/content-management-system/issues"
     },
+    "engines": {
+        "node": "12.x"
+    },
     "homepage": "https://github.com/navnit0707/content-management-system#readme",
     "dependencies": {
         "@handlebars/allow-prototype-access": "^1.0.5",
