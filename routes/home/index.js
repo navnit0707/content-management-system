@@ -140,7 +140,9 @@ router.get('/logout', (req, res) => {
 
 });
 
-
+router.get('/forgot', (req, res) => {
+    res.render('home/forgot');
+});
 
 router.get('/register', (req, res) => {
 
