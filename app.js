@@ -1,12 +1,32 @@
 const express = require('express');
-const app = express();
+//expressJs is a nodesj mdoule
+
+
+const app = express(); 
+//Calls the express function "express()" and puts new Express application inside the app variable (to start a new Express application). 
+//It's something like you are creating an object of a class. Where "express()" is just like class and app is it's newly created object.
+
 const path = require('path');
 const exphbs = require('express-handlebars');
+// express- handlebars is a templete generating library
+
+
 const mongoose = require('mongoose');
+//Mongoose provides a straight-forward, schema-based solution to model your application data. 
+//It includes built-in type casting, validation, query building, business logic hooks and more, out of the box.
+
+
 const bodyParser = require('body-parser');
+// Parse incoming request bodies in a middleware before your handlers, available under the req.body property.
+
 const methodOverride = require('method-override');
+// use to create a middleware that over ride the data we get .
 // const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
+
+
 const Handlebars = require('handlebars');
+/
+
 const upload = require('express-fileupload');
 const session = require('cookie-session');
 const flash = require('connect-flash');
