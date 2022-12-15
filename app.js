@@ -25,7 +25,7 @@ const methodOverride = require('method-override');
 
 
 const Handlebars = require('handlebars');
-/
+
 
 const upload = require('express-fileupload');
 const session = require('cookie-session');
